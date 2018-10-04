@@ -1,0 +1,76 @@
+﻿@using System.Reflection.Emit
+@model OnboardFormViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Create</h2>
+<div>
+
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <h4>Tell us about yourself!</h4>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input asp-for="User.Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="User.Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <input asp-for="User.Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <input asp-for="User.AddressLine1" class="form-control" placeholder="Address Line 1" />
+                <span asp-validation-for="User.AddressLine1" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <h4>Tell us about your pet!</h4>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input asp-for="Pet.Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Pet.Name" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input asp-for="Pet.Age" class="form-control" placeholder="Age" />
+                <span asp-validation-for="Pet.Age" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input asp-for="Pet.Breed" class="form-control" placeholder="Breed" />
+                <span asp-validation-for="Pet.Breed" class="text-danger"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
