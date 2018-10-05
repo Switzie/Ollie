@@ -15,5 +15,11 @@ namespace Ollie.Models
         [Display(Name = "Breed")]
         [StringLength(50)]
         public string Breed { get; set; }
+        [Display(Name = "Weight")]
+        public int Weight { get; set; }
+
+        [Display(Name = "Gender")]
+        [StringLength(10)]
+        public string Gender { get; set; }
     }
 }
