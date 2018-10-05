@@ -11,8 +11,8 @@ using System;
 namespace Ollie.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181004222420_Pet-model")]
-    partial class Petmodel
+    [Migration("20181005013548_add-pet")]
+    partial class addpet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,7 +191,9 @@ namespace Ollie.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("OwnerId");
+                    b.Property<Guid>("OwnerId");
+
+                    b.Property<Guid>("PetGuid");
 
                     b.Property<int>("Weight");
 
@@ -218,6 +220,8 @@ namespace Ollie.Data.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("State");
+
+                    b.Property<Guid>("UserGuid");
 
                     b.Property<string>("ZipCode");
 

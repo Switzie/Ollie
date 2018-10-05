@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ollie.Data;
+using Ollie.Managers;
 
 namespace Ollie
 {
@@ -26,7 +27,7 @@ namespace Ollie
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddScoped<UserManager, UserManager>();
             services.AddMvc();
         }
 

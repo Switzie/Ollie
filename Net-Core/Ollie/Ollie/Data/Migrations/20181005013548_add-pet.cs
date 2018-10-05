@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Ollie.Data.Migrations
 {
-    public partial class Petmodel : Migration
+    public partial class addpet : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,8 @@ namespace Ollie.Data.Migrations
                     Age = table.Column<int>(type: "int", nullable: false),
                     Breed = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
+                    OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PetGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -42,6 +43,7 @@ namespace Ollie.Data.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

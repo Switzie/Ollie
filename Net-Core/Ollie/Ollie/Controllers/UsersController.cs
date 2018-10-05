@@ -24,7 +24,7 @@ namespace Ollie.Controllers
         }
 
         // GET: Users/Details/5
-        [HttpGet("{id}")]
+        [HttpGet("Users/{id}/Pets")]
         public async Task<IActionResult> Pets(Guid? id)
         {
             if (id == null)
@@ -62,7 +62,8 @@ namespace Ollie.Controllers
                 {
                     Name = form.User.Name,
                     AddressLine1 = form.User.AddressLine1,
-                    Email = form.User.Email
+                    Email = form.User.Email,
+                    UserGuid = Guid.NewGuid()
                 };
                 var pet = new Pet
                 {
