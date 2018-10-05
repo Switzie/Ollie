@@ -11,7 +11,8 @@ namespace Ollie.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Guid UserGuid { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }

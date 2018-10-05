@@ -28,6 +28,7 @@ namespace Ollie
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped<UserManager, UserManager>();
+            services.AddScoped<PetManager, PetManager>();
             services.AddMvc();
         }
 

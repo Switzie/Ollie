@@ -1,4 +1,4 @@
-﻿@using System.Reflection.Emit
+﻿@using Ollie.Util
 @model OnboardFormViewModel
 
 @{
@@ -9,59 +9,52 @@
 
     <form asp-action="Create" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
+        <h4>Owner: </h4>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <h4>Tell us about yourself!</h4>
+                @Html.LabelFor(x => x.User.FirstName)
+                @Html.TextBoxFor(x => x.User.FirstName, new { @class = "form-control" })
+                <span asp-validation-for="User.FirstName" class="text-danger"></span>
             </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(x => x.User.LastName)
+                @Html.TextBoxFor(x => x.User.LastName, new { @class = "form-control" })
+                <span asp-validation-for="User.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.User.Email)
+            @Html.TextBoxFor(x => x.User.Email, new { @class = "form-control" })
+            <span asp-validation-for="User.Email" class="text-danger"></span>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(x => x.User.AddressLine1)
+            @Html.TextBoxFor(x => x.User.AddressLine1, new { @class = "form-control" })
+            <span asp-validation-for="User.AddressLine1" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.User.AddressLine2)
+            @Html.TextBoxFor(x => x.User.AddressLine2, new { @class = "form-control" })
+            <span asp-validation-for="User.AddressLine2" class="text-danger"></span>
+        </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <input asp-for="User.Name" class="form-control" placeholder="Name" />
-                <span asp-validation-for="User.Name" class="text-danger"></span>
+                @Html.LabelFor(x => x.User.City)
+                @Html.TextBoxFor(x => x.User.City, new { @class = "form-control" })
+                <span asp-validation-for="User.City" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(x => x.User.State)
+                @Html.DropDownListFor(x => x.User.State, DropDownHelper.States, new { @class = "form-control" })
+                <span asp-validation-for="User.State" class="text-danger"></span>
+            </div>
 
-            <div class="form-group col-md-6">
-                <input asp-for="User.Email" class="form-control" placeholder="Email" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-
-            <div class="form-group col-md-6">
-                <input asp-for="User.AddressLine1" class="form-control" placeholder="Address Line 1" />
-                <span asp-validation-for="User.AddressLine1" class="text-danger"></span>
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <h4>Tell us about your pet!</h4>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input asp-for="Pet.Name" class="form-control" placeholder="Name" />
-                <span asp-validation-for="Pet.Name" class="text-danger"></span>
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input asp-for="Pet.Age" class="form-control" placeholder="Age" />
-                <span asp-validation-for="Pet.Age" class="text-danger"></span>
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input asp-for="Pet.Breed" class="form-control" placeholder="Breed" />
-                <span asp-validation-for="Pet.Breed" class="text-danger"></span>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(x => x.User.ZipCode)
+                @Html.TextBoxFor(x => x.User.ZipCode, new { @class = "form-control" })
+                <span asp-validation-for="User.ZipCode" class="text-danger"></span>
             </div>
         </div>
 

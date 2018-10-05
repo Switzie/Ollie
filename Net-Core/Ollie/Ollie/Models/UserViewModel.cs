@@ -4,10 +4,15 @@ namespace Ollie.Models
 {
     public class UserViewModel
     {
-        [Required(ErrorMessage = "Please enter your name")]
-        [Display(Name = "Name")]
+        [Required(ErrorMessage = "Please enter your first name")]
+        [Display(Name = "First Name")]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name")]
+        [Display(Name = "Last Name")]
+        [StringLength(50)]
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -21,23 +26,21 @@ namespace Ollie.Models
         [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
 
-        //[Display(Name = "Address Line 2")]
-        //public string AddressLine2 { get; set; }
+        [Display(Name = "Address Line 2")]
+        public string AddressLine2 { get; set; }
 
-        //[Required(ErrorMessage = "Please enter your zip code")]
-        //[Display(Name = "Zip code")]
-        //[StringLength(10, MinimumLength = 4)]
-        //public string ZipCode { get; set; }
+        [Required(ErrorMessage = "Please enter your zip code")]
+        [Display(Name = "Zip code")]
+        [StringLength(10, MinimumLength = 4)]
+        public string ZipCode { get; set; }
 
-        //[Required(ErrorMessage = "Please enter your city")]
-        //[StringLength(50)]
-        //public string City { get; set; }
+        [Required(ErrorMessage = "Please enter your city")]
+        [Display(Name = "City")]
+        [StringLength(50)]
+        public string City { get; set; }
 
-        //[StringLength(10)]
-        //public string State { get; set; }
-
-        //[Required(ErrorMessage = "Please enter your country")]
-        //[StringLength(50)]
-        //public string Country { get; set; }
+        [StringLength(10)]
+        [Display(Name = "State")]
+        public string State { get; set; }
     }
 }

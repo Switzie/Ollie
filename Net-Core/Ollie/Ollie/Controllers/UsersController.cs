@@ -1,83 +1,93 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Ollie.Data;
+using Ollie.Exceptions;
+using Ollie.Managers;
 using Ollie.Models;
 
 namespace Ollie.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UserManager _userManager;
+        private readonly PetManager _petManager;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(UserManager userManager, PetManager petManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _petManager = petManager;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.User.ToListAsync());
+            try
+            {
+                return View(_userManager.GetUsers());
+            }
+            catch (Exception ex)
+            {
+                if (ex is DataAccessException)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while attempting to retreieve this resource.");
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError,"An unexpected error occurred while processing this request");
+            }
+            
         }
 
-        // GET: Users/Details/5
         [HttpGet("Users/{id}/Pets")]
-        public async Task<IActionResult> Pets(Guid? id)
+        public IActionResult Pets(Guid? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var pet = _petManager.GetPetByOwnerId(id);
+                if (pet == null)
+                {
+                    return NotFound();
+                }
+
+                return View(pet);
             }
-
-
-            var pet = await _context.Pet.SingleOrDefaultAsync(x => x.OwnerId == id);
-            if (pet == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                if (ex is DataAccessException)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while attempting to retreieve this resource.");
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while processing this request");
             }
-
-            return View(pet);
+            
         }
 
-        // GET: OnBoard/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: OnBoard/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OnboardFormViewModel form)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                var owner = new User
-                {
-                    Name = form.User.Name,
-                    AddressLine1 = form.User.AddressLine1,
-                    Email = form.User.Email,
-                    UserGuid = Guid.NewGuid()
-                };
-                var pet = new Pet
-                {
-                    Name = form.Pet.Name,
-                    Age = form.Pet.Age,
-                    Breed = form.Pet.Breed,
-                    OwnerId = owner.UserGuid
-                };
-                _context.User.Add(owner);
-                _context.Pet.Add(pet);
-                await _context.SaveChangesAsync();
+                if (!ModelState.IsValid) return View(form);
+                await _userManager.CreateOwner(form);
                 return RedirectToAction(nameof(Index));
             }
-            return View(form);
+            catch (Exception ex)
+            {
+                if (ex is DataAccessException)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while attempting to retreieve this resource.");
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while processing this request");
+            }
         }
     }
 }
