@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Ollie.Models
+﻿namespace Ollie.Models
 {
     public class OnboardFormViewModel
     {

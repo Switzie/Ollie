@@ -61,7 +61,7 @@ namespace Ollie.Util
 
         public static List<SelectListItem> Genders = new List<SelectListItem>{
             new SelectListItem {Text = "Male", Value = "Male"},
-            new SelectListItem {Text = "Female", Value = "Female"},
+            new SelectListItem {Text = "Female", Value = "Female"}
         };
     }
 }
