@@ -1,6 +1,5 @@
 ﻿@model Pet
 
-
 <h2>Pet</h2>
 
 <div>
@@ -13,6 +12,12 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Age)
         </dt>
         <dd>
@@ -23,6 +28,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Breed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
         </dd>
     </dl>
 </div>
